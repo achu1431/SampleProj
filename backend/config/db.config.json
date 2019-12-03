@@ -1,0 +1,10 @@
+{
+    "database": {
+        "dbConfig": {
+            "host": "cluster0-hoxm7.mongodb.net",
+            "dbName": "SampleDB",
+            "username": "Ashwin",
+            "password":"26f013dbf57c9d1eac85630bb4b53fbad8b3213f225f201ca7dda234a115b6c3"
+        }
+    }
+}
