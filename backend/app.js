@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const crypto = require('crypto');
+const User = require('./modals/user');
+const userRoutes = require("./routes/userRoute");
 
 
 
@@ -50,6 +52,8 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use("/api/user", userRoutes);
 
 function decrypt(data) {
   pass = 'Break555';
