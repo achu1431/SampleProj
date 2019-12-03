@@ -3,6 +3,8 @@
       <!-- <span style="font-size: 24px;"><img src="https://img.icons8.com/clouds/100/000000/search.png">Holidays-Scan</span> -->
       <span style="font-size: 24px;"><i class="fab fa-stumbleupon"></i></span>
       <span class="example-spacer"></span>
+      <button *ngIf="userIsAuthenticated && roleName == 'Admin'" mat-button color="primary" (click)="openDialog()" ><i class="fas fa-plus"></i>
+        Add Product</button>
       <button *ngIf="userIsAuthenticated" mat-button color="primary" (click)="Onlogout()"><i class="fas fa-sign-out-alt"></i>
         Log out</button>
   

@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const crypto = require('crypto');
 const User = require('./modals/user');
 const userRoutes = require("./routes/userRoute");
+const productRoutes = require("./routes/productRoute");
 
 
 
@@ -54,6 +55,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/user", userRoutes);
+app.use("/api/product", productRoutes);
 
 function decrypt(data) {
   pass = 'Break555';

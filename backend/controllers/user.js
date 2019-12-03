@@ -52,21 +52,25 @@ exports.Login = (req, res, next) => {
           message: "user doesn't exist"
         });
       } else {
+        fetchedUser = user;
         return bcrypt.compare(req.body.password, user.password);
       }
     }).then(result => {
       if (!result) {
-        res.status(404).json({
+        res.status(400).json({
           message: "user not authorized"
         })
       } else {
-
-        res.status(201).json({
-          message: "Login Successful"
-        });
+        Role.findById({_id:fetchedUser.role}).then(result =>{
+          res.status(201).json({
+            message: "Login Successful",
+            role: result.roleName
+          });
+        })
+     
       }
     }).catch(err => {
-      res.status(401).json({
+      res.status(404).json({
         message: "Invalid Credentials"
       });
     })

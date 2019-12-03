@@ -1,6 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginService } from '../login.service';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators
+} from '@angular/forms';
+import {
+  LoginService
+} from '../login.service';
+import {
+  Router
+} from '@angular/router';
 declare let alertify: any;
 @Component({
   selector: 'app-login',
@@ -11,7 +23,8 @@ export class LoginComponent implements OnInit {
   public containerHeight;
   public temp;
   form: FormGroup;
-  constructor(public loginservice: LoginService) { }
+  public role;
+  constructor(public loginservice: LoginService, public router: Router) {}
 
   ngOnInit() {
     this.temp = document.getElementsByTagName('body')[0];
@@ -28,14 +41,23 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    if(this.form.invalid)
+    if (this.form.invalid)
       return;
     const userData = {
       emailId: this.form.value.email,
       password: this.form.value.password
     }
-    this.loginservice.onLogin(userData).subscribe(data =>{
+    this.loginservice.onLogin(userData).subscribe(data => {
       alertify.success(data.message);
+      if (data.role) {
+        this.loginservice.roleListener.next(data.role);
+        this.loginservice.authStatusListener.next(true);
+        this.router.navigate(['/dashboard'], {
+          replaceUrl: true
+        });
+      }
+    }, err => {
+      alertify.warning(err.message);
     })
   }
 
