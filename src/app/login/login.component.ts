@@ -61,4 +61,8 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  reDirect(){
+    this.router.navigate(['/signup'], {replaceUrl: true})
+  }
+
 }
