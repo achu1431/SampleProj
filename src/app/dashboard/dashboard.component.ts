@@ -16,7 +16,7 @@ import {
   MatDialog
 } from '@angular/material';
 import { LoginService } from '../login.service';
-import { Options } from 'ng5-slider';
+import { Options, LabelType } from 'ng5-slider';
 declare let alertify: any;
 
 @Component({
@@ -36,7 +36,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public maxValue = 50000;
   options: Options = {
     floor: 0,
-    ceil: 50000
+    ceil: 50000,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return '<b>Min price:</b> ₹' + value;
+        case LabelType.High:
+          return '<b>Max price:</b> ₹' + value;
+        default:
+          return '₹' + value;
+      }
+    }
   };
   constructor(public prodServ: ProductService, public dialog: MatDialog, public loginservice: LoginService) {
     this.getProdSubscrip = this.prodServ.productsSub.subscribe(data => {
@@ -109,6 +119,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.prodServ.productsSub.next(data.products);
       })
     }
+  }
+
+  sliderPrice() {
+    const slideData = {
+      minValue: this.minValue,
+      maxValue: this.maxValue
+    }
+
+    this.prodServ.sortSlider(slideData).subscribe(data => {
+      this.prodServ.productsSub.next(data.products);
+    })
   }
 
 }

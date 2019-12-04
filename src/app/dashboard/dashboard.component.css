@@ -1,11 +1,16 @@
-/* .example-card {
-    max-width: 200px;
-  } */
-
 .example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
+
+.NoData-image {
+  background-image: url('https://i.imgur.com/FPC6uwX.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
 
 .mat-card-header-text {
   margin: none !important;

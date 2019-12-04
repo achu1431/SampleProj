@@ -32,4 +32,8 @@ export class ProductService {
   sortProduct(info) {
     return this.http.post<{ message: string, products: any }>(`${this.urlEndpoint}/api/product/getSorted`, info);
   }
+
+  sortSlider(info) {
+    return this.http.post<{ message: string, products: any }>(`${this.urlEndpoint}/api/product/getSlideSort`, info);
+  }
 }

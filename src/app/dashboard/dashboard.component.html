@@ -12,15 +12,18 @@
         <div class="col col-12 h-100">
           <div class="row">
             <div class="col col-12 text-right pt-2 pb-2">
-              <ng5-slider class="fontsize" [(value)]="minValue" [(highValue)]="maxValue" [options]="options">
-              </ng5-slider>
+              <div>
+                <ng5-slider class="fontsize" [(value)]="minValue" [(highValue)]="maxValue" (mouseup)="sliderPrice()"
+                  [options]="options">
+                </ng5-slider>
+              </div>
+
               <button type="button" mat-raised-button color="primary" (click)="drawer.toggle()">
                 Sort &nbsp;<i class="fas fa-sort"></i>
               </button>
             </div>
           </div>
-          <!-- (mousemove)="sliderPrice()" -->
-          <div class="row h-100">
+          <div *ngIf="products.length" class="row h-100">
             <div *ngFor="let product of products" class="col col-lg-4 col-md-6 pt-2">
               <mat-card class="example-card">
                 <mat-card-header>
@@ -36,6 +39,19 @@
                   <i class="fas fa-edit f-12-rem" (click)="edit(product)"></i>
                 </mat-card-actions>
               </mat-card>
+            </div>
+          </div>
+          <div *ngIf="!products.length" class="row h-100">
+            <div class="col col-12 h-100">
+              <div class="row h-100 justify-content-center">
+                <div class="col col-8 col-md-6 col-lg-4 h-100">
+                  <div class="d-table h-100 w-100">
+                    <div class="d-table-cell h-100 align-middle">
+                      <div class="h-100 NoData-image"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

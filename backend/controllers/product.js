@@ -130,3 +130,29 @@ exports.sortProds = (req, res, next) => {
     })
   }
 }
+
+exports.slideSortProds = (req, res, next) => {
+  if (req.body) {
+    Product.aggregate([{
+      $match: {
+        productPrice: {
+          $gte: req.body.minValue,
+          $lte: req.body.maxValue
+        }
+      }
+    }, {
+      $sort: {
+        productPrice: -1
+      }
+    }]).then(result => {
+      res.status(201).json({
+        message: "Sorted Successfuly",
+        products: result
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err.message
+      })
+    })
+  }
+}
