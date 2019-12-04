@@ -1,0 +1,48 @@
+<mat-drawer-container autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
+
+    <p (click)="sort('ascending');drawer.toggle()"><i class="fas fa-sort-numeric-down"></i>&nbsp;Ascending</p>
+    <p (click)="sort('decending');drawer.toggle()"><i class="fas fa-sort-numeric-up"></i>&nbsp;Decending</p>
+  </mat-drawer>
+
+  <div>
+
+    <div class="container-fluid" [style.height.px]="containerHeight">
+      <div class="row h-100">
+        <div class="col col-12 h-100">
+          <div class="row">
+            <div class="col col-12 text-right pt-2 pb-2">
+              <ng5-slider class="fontsize" [(value)]="minValue" [(highValue)]="maxValue" [options]="options">
+              </ng5-slider>
+              <button type="button" mat-raised-button color="primary" (click)="drawer.toggle()">
+                Sort &nbsp;<i class="fas fa-sort"></i>
+              </button>
+            </div>
+          </div>
+          <!-- (mousemove)="sliderPrice()" -->
+          <div class="row h-100">
+            <div *ngFor="let product of products" class="col col-lg-4 col-md-6 pt-2">
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title class="text-truncate">{{product.productName}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                  alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                  {{product.productPrice}}
+                </mat-card-content>
+                <mat-card-actions>
+                  <i class="fas fa-trash-alt f-12-rem" (click)="delete(product)"></i>&nbsp;&nbsp;
+                  <i class="fas fa-edit f-12-rem" (click)="edit(product)"></i>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</mat-drawer-container>
